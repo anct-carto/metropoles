@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<!-- Développement : service cartographie du CGET -->
+
+    <meta charset="utf-8" />
+    <title>Métropoles</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="shortcut icon" type="image/png" href="img/picto_favicon.png"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="src/leaflet-sidebar.css" />
+	<link href="https://fonts.googleapis.com/css?family=Asap:400,400i,500,500i,600,600i,700,700i|Crimson+Text:400,400i,600,600i,700,700i" rel="stylesheet">
+	<link rel="stylesheet" href="style.css" />
+	
+</head>
+	
+
+
+<body>
+	
+	<!-- Construction de panneau latéral -->
+    <div id="sidebar" class="sidebar collapsed">
+        
+		 <!-- Boutons de menu -->
+		<div class="sidebar-tabs" id="barre-verticale">
+            <ul role="tablist" >
+                <li><a href="#home" role="tab" id="logo" title="Retour à l'accueil" class="onglets"><i style="vertical-align:middle;" class="fas fa-home"></i></a></li>
+				<li><a href="https://upload.wikimedia.org/wikipedia/commons/f/f0/Plage_Sainte_Anne.JPG" id="download" role="tab" target="_blank" title="Télécharger l'atlas" class="onglets"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
+			</ul>
+        </div>
+
+        <!-- Contenu des onglets -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                
+				<h1>Les métropoles françaises
+				<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+				
+				<!-- Page d'accueil -->
+				<div class="presentation" id="defaut">
+					<div>
+						<h2>Portrait des 22 métropoles</h2>
+						<p><span style="color:white;">ICI</span>, possibilité de mettre un texte introductif de présentation</p>
+						
+					</div>
+					
+					<div id="sources" style="width:70%;">
+						<p><i>Sources&nbsp;: <a href="https://www.cget.gouv.fr/territoires/metropoles" target="_blank">CGET, Direction des stratégories territoriales</a>• Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" target="_blank">CGET service cartographie</a></i></p>
+						<p><img src="img/cget.png" style="vertical-align:middle; width:100%;"/></p>
+					</div>
+				</div>
+				
+				<!-- Contenu de la fiche d'information -->
+				<div class="divTable" id="popup">
+					<div id="libgeo"></div>
+					<div class="divTableBody">
+						<div class="divTableCell">
+								<h3 class="divTableRow">Date de création&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="date"></div>
+						</div>
+						<div class="divTableCell">
+								<h3 class="divTableRow">Nombre de communes&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="nbcom"></div>
+						</div>
+						<div class="divTableCell">
+								<h3 class="divTableRow">Superficie (en km²)&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="superficie"></div>
+						</div>
+						<div class="divTableCell">
+								<h3 class="divTableRow">Population en 2015&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="population"></div>
+								<div class="divTableRow description" id="pctpopdep"></div>
+								<div class="divTableRow description" id="pctpopreg"></div>
+						</div>
+						<div class="divTableCell">
+								<h3 class="divTableRow">Nombre d’emplois dans la Métropole en 2015&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="nbemplois"></div>
+								<div class="divTableRow description" id="pctempdep"></div>
+								<div class="divTableRow description" id="pctempreg"></div>
+						</div>
+						<div class="divTableCell">
+								<h3 class="divTableRow">Nombre de quartiers prioritaires de la politique de la ville dans la Métropole&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="nbqpv"></div>
+								<div class="divTableRow description" id="pctpopqpv"></div>
+						</div>
+						<div class="divTableCell">
+								<h3 class="divTableRow">Taux de chômage (en %)&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="txchom"></div>
+						</div>
+						<div class="divTableCell">
+								<h3 class="divTableRow">Part des 15-24 ans ni en emploi ni en formation&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="pctneet"></div>
+						</div>
+						<div class="divTableCell">
+								<h3 class="divTableRow">Potentiel financier par habitant&nbsp;:</h3>
+								<div class="divTableRow chiffre" id="potentiel"></div>
+						</div>
+					</div>
+					
+				</div>
+					
+            </div>
+
+        </div>
+    </div>
+
+	<!-- Bloc de la carte -->
+	<div id="mapid"></div>
+
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+	
+    <script src="src/leaflet-sidebar.js"></script>
+
+	<script type="text/javascript"  src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
+	<script type="text/javascript" src="data/metropoles.js"></script>
+	<script type="text/javascript" src="data/masque.js"></script>
+	<script type="text/javascript" src="data/toutesCouches.js"></script>
+    
+	<script>
+			
+		// Création de la carte
+		var map = L.map('mapid', {maxZoom:11, minZoom:5 })
+		.setView([46.5, -1.8], 6);
+		map.zoomControl.setPosition('topright');
+		map.attributionControl.addAttribution('<a href="https://cartotheque.cget.gouv.fr/cartes" style="text-decoration:none;" target="_blank ">CGET</a>');
+			
+		//Ajout du panneau latéral
+		var sidebar = L.control.sidebar('sidebar').addTo(map);
+		sidebar.open('home');
+		
+		//Reglage double-clic
+		var timer = 0;
+		var delay = 200;
+		var prevent = false;
+		
+/* COULEURS - STYLES - LEGENDE */
+		
+		
+		//Couleur des circle
+		var couleur;
+		function getCircleColor(categorie) {
+			if (categorie == '1') {couleur = "#009aa5"; return couleur;}
+			else if (categorie == '2') {couleur = "#f39700"; return couleur;}
+			else if (categorie == '3') {couleur = "#a182ba"; return couleur;}
+			else if (categorie == '4') {couleur = "#d873aa"; return couleur;}
+			else if (categorie == '5') {couleur = "#02a765"; return couleur;}
+			else if (categorie == '6') {couleur = "#74b62b"; return couleur;}
+			else {couleur = "#e5016b"; return couleur;}
+		}
+		
+/* CREATION DES COUCHES */		
+		
+		//Niveaux d'affichage des couches
+		map.createPane('fond');
+		map.getPane('fond').style.zIndex = 500;
+		map.createPane('contour');
+		map.getPane('contour').style.zIndex = 500;
+		map.createPane('cercles');
+		map.getPane('cercles').style.zIndex = 510;
+		map.createPane('metro');
+		map.getPane('metro').style.zIndex = 520;
+		
+		
+		//Couches du fond de carte
+		Cache = L.geoJSON(JS_masque, {color: "#db9795", weight: 0, opacity: 1, fillOpacity: 1, pane: "fond"}).addTo(map);
+		
+		Fond_Regions = L.geoJSON(JS_tout, {
+			filter: function(feature, layer) {return feature.properties.type=="région"},
+			style : {weight: 0, opacity: 1, fillOpacity: 1, fillColor:"#d9d9d9", pane: "fond"}
+			}).addTo(map);
+		
+		Contour_Regions = L.geoJSON(JS_tout, {
+			filter: function(feature, layer) {return feature.properties.type=="région"},
+			style : {color: "#ffffff", weight: 2, opacity: 1, fillOpacity: 0, pane: "contour"}
+			}).addTo(map);
+		
+		Departements = L.geoJSON(JS_tout, {
+			filter: function(feature, layer) {return feature.properties.type=="départemen"},
+			style: {color: "#ffffff", weight: 1, opacity: 1, fillOpacity: 0, pane: "contour"}
+			}).addTo(map);
+		
+		ZAU = L.geoJSON(JS_tout, {
+			filter: function(feature, layer) {return feature.properties.type=="zau"},
+			style: function(feature){
+				if (feature.properties.codgeo=="120"){
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#cccccc", pane: "fond"};
+				}
+				else if (feature.properties.codgeo=="112"){
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#bfbfbf", pane: "fond"};
+				}
+				else if (feature.properties.codgeo=="111"){
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#b3b3b3", pane: "fond"};
+				}
+				else {
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#d9d9d9", pane: "fond"};
+				}
+			}
+		})
+		.addTo(map);
+		
+		Metropoles_S = L.geoJSON(JS_tout, {
+			filter: function(feature, layer) {return feature.properties.type=="epci"},
+			style : {interactive : false, color: "#000", weight: 0, fillOpacity: 1, pane: "metro"}
+			}).addTo(map);
+		
+		var Metropoles_cercles = [];
+		Metropoles_cercles = L.geoJSON(JS_metropoles, {
+			style: function(feature){return { opacity: 1, fillOpacity: 1, weight: 0, color: feature.properties.color, pane:'cercles'};},
+			onEachFeature: function(feature, layer) {
+				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
+				layer.on('click', function(e) {	popup(feature.properties);});	
+				}		
+			}).addTo(map);
+			
+			/*pointToLayer: function(feature, latlng) {
+				
+				marker = L.circleMarker(latlng,{radius : feature.properties.TAILLE, pane: "cercles"}).addTo(map);
+
+				marker.bindTooltip(feature.properties.libgeo), {className: 'Tooltips'};
+				marker.on('click', function(e) {popup(e.target.properties); });
+				marker.properties = {};
+				marker.properties.libgeo = feature.properties.libgeo;
+				marker.properties.date = feature.properties.date;
+				marker.properties.nbcom = feature.properties.nbcom;
+				marker.properties.superficie = feature.properties.superficie;
+				marker.properties.population = feature.properties.population;
+				marker.properties.pctpopdep = feature.properties.pctpopdep;
+				marker.properties.pctpopreg = feature.properties.pctpopreg;
+				marker.properties.nbemplois = feature.properties.nbemplois;
+				marker.properties.pctempdep = feature.properties.pctempdep;
+				marker.properties.pctempreg = feature.properties.pctempreg;
+				marker.properties.nbqpv = feature.properties.nbqpv;
+				marker.properties.pctpopqpv = feature.properties.pctpopqpv;
+				marker.properties.txchom = feature.properties.txchom;
+				marker.properties.pctneet = feature.properties.pctneet;
+				marker.properties.potentiel = feature.properties.potentiel;
+				}*/
+			//});
+		
+		
+
+		
+/* FICHE TERRITOIRE */
+		
+		//Fonctions de formatage de nombres
+		function format1(nombre){ //2 chiffres après la virgule
+		  nombre=parseFloat(nombre).toFixed(2);
+		  return nombre;
+		}
+		function format2(nombre){ //séparateurs de milliers
+		  nombre=parseFloat(nombre).toFixed(0);
+		  nombre += '';
+		  var sep = '&nbsp;';
+		  var reg = /(\d+)(\d{3})/;
+		  while( reg.test( nombre)) {
+			nombre = nombre.replace( reg, '$1' +sep +'$2');
+		  }
+		  return nombre;
+		}
+		function format3(nombre){ // pas de chiffre après la virgule
+		  nombre=parseFloat(nombre).toFixed(0);
+		  return nombre;
+		}
+		
+		function format4(nombre){ // valeur absolue
+		  nombre=parseFloat(nombre).toFixed(2);
+		  return Math.abs(nombre);
+		}
+		
+		function format5(nombre){ // remplacer virgule par le point et donner le % avec 2 chiffres apres la virgule
+		  nombre = nombre.replace(',','.')
+		  nombre = nombre*100;
+		  nombre=parseFloat(nombre).toFixed(2);
+		  return nombre;
+		}
+		
+		//Création d'une fiche
+		function popup(e) {
+			if (document.getElementById('sidebar').classList.contains('collapsed')){sidebar.open('home');}
+			document.getElementById('popup').style.display = "block";
+			document.getElementById('defaut').style.display = "none";
+			//Remplissage de la popup
+			document.getElementById('libgeo').innerHTML = "<h1 style='color:#00414d'>"+e.libgeo+"</h1>";
+			document.getElementById('date').innerHTML = "<span>"+e.date+"</span>";
+			document.getElementById('nbcom').innerHTML = "<span>"+e.nbcom+"</span>";
+			document.getElementById('superficie').innerHTML = "<span>"+format3(e.superficie)+" km²</span>";
+			document.getElementById('population').innerHTML = "<span>"+format2(e.population)+"</span>";
+			document.getElementById('pctpopdep').innerHTML = "<span>Part de la population départementale&nbsp;: "+format1(e.pctpopdep)+"%</span>";
+			document.getElementById('pctpopreg').innerHTML = "<span>Part de la population régionale&nbsp;: "+format1(e.pctpopreg)+"%</span>";
+			document.getElementById('nbemplois').innerHTML = "<span>"+format2(e.nbemplois)+"</span>";
+			document.getElementById('pctempdep').innerHTML = "<span>Part des emplois du département&nbsp;: "+format1(e.pctempdep)+"%</span>";
+			document.getElementById('pctempreg').innerHTML = "<span>Part des emplois de la région&nbsp;: "+format1(e.pctempreg)+"%</span>";
+			document.getElementById('nbqpv').innerHTML = "<span>"+e.nbqpv+"</span>";
+			document.getElementById('pctpopqpv').innerHTML = "<span>Part de la population vivant en QPV : "+format1(e.pctpopqpv)+"%</span>";
+			document.getElementById('txchom').innerHTML = "<span>"+format1(e.txchom)+"%</span>";
+			document.getElementById('pctneet').innerHTML = "<span>"+format1(e.pctneet)+"%</span>";
+			document.getElementById('potentiel').innerHTML = "<span>"+e.potentiel+"</span>";
+		}
+		
+	
+/* ACTIONS */
+		
+		function resetView() {
+			map.setView([46.5, -1.8], 6);		
+		}
+		
+		function resetMap () {
+			sidebar.open('home');
+			}
+			
+		function retourAcceuil () {
+			resetView();
+			resetMap ();
+		}
+		
+			
+		/*Action au clic sur la carte
+		map.on('click', function(e) { 
+			alert('cliconmap');
+			});*/
+		
+		//Action au clic sur "home"
+		document.getElementById("logo").addEventListener("click", function(event){
+			event.stopPropagation();
+			retourAcceuil();
+		});
+		
+   </script>
+	
+</body>
+
+</html>

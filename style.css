@@ -1,0 +1,354 @@
+body {
+	padding: 0;
+	margin:0;
+	}
+
+html, body, #mapid {
+    height: 100%;
+	font-family: 'Asap', sans-serif;
+	color: #00414d;
+	}
+	
+a {
+	text-decoration:none;
+	color: white;
+	
+	}
+
+a:hover {
+  color : #ffee00;
+}
+
+i {
+	font-size:0.9em;
+	font-style: italic;	
+	}
+	
+strong {
+	font-weight: bold;
+	}
+	
+span {
+	color: white;
+	font-size:1em;
+}
+		
+h1{
+	font-size:2 em;
+	text-transform:uppercase;
+	color: white;
+	}
+	
+h2{
+	font-size:1.2em;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+h3{
+	font-size:0.9em;
+	font-weight: bold;
+	color: #00414d;
+}
+	
+.leaflet-left {
+	left: 0;
+	}	
+	
+.fas {
+  color : white;
+}
+	
+#sources {
+	margin-top:50px;
+	font-size:0.8em;
+	}
+
+.Tooltips {
+	font-size:1.1em;
+	padding:5px;
+	border:none;
+	color: #00414d;
+	background-color: white;
+	}
+	
+.epci_Tooltips {
+	font-size:1em;
+	padding:5px;
+	border:none;
+	color: red;
+	background-color: rgba(255, 255, 255, 0.6);
+	box-shadow: none;
+	border: none;
+	}
+
+.bas {
+	margin-top:50px;
+}
+
+#boiteRecherche{
+	margin-bottom:40px;
+}
+	
+	
+	/*Affichage des onglets*/	
+		
+#popup {
+	display: none;
+	}
+	
+#filtres {
+	display: none;
+	}
+	
+#onglet_departement {
+	display: none;
+	
+	}
+	
+#onglet_commune {
+	display: none;
+	}
+	
+#onglet_epci {
+	display: none;
+	}
+	
+#defaut {
+	display: block;
+	}
+
+#logo_dep {
+	background-image: url("img/tabdep.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+#logo_dep:hover {
+	background-image: url("img/tabondep.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+#logo_epci {
+	background-image: url("img/tabepci.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+#logo_epci:hover {
+	background-image: url("img/tabonepci.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+#logo_com {
+	background-image: url("img/tabcom.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+#logo_com:hover {
+	background-image: url("img/taboncom.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+	
+.onglets{
+	background-color: #00414d;
+	border: 0.1px solid #5a77b7;
+	
+}
+
+.onglets img{
+	vertical-align:middle;
+	padding:7px;
+}
+
+#filtre {
+	background-image: url("img/picto_points_off.png");
+	background-repeat: no-repeat;
+	background-size: 18px;
+	background-position: center;
+	}
+	
+#filtre:hover {
+	background-image: url("img/picto_points_on.png");
+	background-repeat: no-repeat;
+	background-size: 18px;
+	background-position: center;
+	}
+
+#departements {
+	background-image: url("img/picto_onglet_off.png");
+	background-repeat: no-repeat;
+	background-size: 18px;
+	background-position: center;
+	}
+	
+#departements:hover {	
+	background-image: url("img/picto_onglet_on.png");
+	background-repeat: no-repeat;
+	background-size: 18px;
+	background-position: center;
+	}		
+
+.onglets:hover {
+	color: #004494;
+	background-color: #e1ff2f;
+}
+
+.onglets_on a{
+	background-color: #f26664;
+	border : 0.1px solid #5a77b7;
+}
+
+.bouton_min_off {
+		background-color: transparent;
+		border: 0.2px;
+		cursor:pointer;
+		padding:10px;
+		vertical-align: middle;
+		text-align: center;
+		}
+
+.bouton_min_on {
+		background-color: #206a75;
+		border-radius: 4px;
+		border: 0.2px;
+		cursor:pointer;
+		padding:10px;
+		vertical-align: middle;
+		text-align: center;
+		}
+		
+.bouton_off {
+		color: #00414d;
+		font-weight: bold;
+		background-color: transparent;
+		border: none;
+		cursor:pointer;
+		padding:3px;
+		margin: 1px;
+		vertical-align: middle;
+		text-align: left;
+		}
+		
+.bouton:hover {
+		background-color: #e1ff2f;
+		border-radius: 4px;
+		}
+		
+
+.bouton_on {
+		color: white;
+		font-weight: bold;
+		background-color: transparent;
+		border: none;
+		cursor:pointer;
+		padding:3px;
+		margin: 1px;
+		vertical-align: middle;
+		text-align: left;
+		}
+
+#retourDEP {
+		cursor:pointer;	
+		margin-top:15px;
+		}
+		
+#retourCategories {
+		cursor:pointer;	
+		margin-top:15px;
+		}
+
+button {
+	vertical-align: middle;	
+	background-color: transparent;
+	}	
+
+.button_container {
+	margin-top:15px;
+	}
+	
+.bouton_accueil {
+	background-color: #206a75;
+	opacity:0.8;
+	width:49%;
+	color: white;
+	font-weight: bold;
+	border-radius: 4px;
+	cursor:pointer;
+	display: inline-block;
+	padding:4px;
+	font-size:0.9em;
+}
+
+.bouton_accueil img {
+	width:15px;
+	padding:2px;
+}
+
+.bouton_accueil:hover {
+		background-color: #e1ff2f;
+		border-radius: 4px;
+		color: #00414d;
+		}
+
+
+/*Style du tableau*/
+	
+.divTable{
+	display: table;
+	
+}
+
+
+.divTableRow {
+	display: table-row;	
+}
+
+.divTableCell, .divTableHead {
+	border: 0.1px solid #88a0b7;
+	vertical-align:middle;
+	padding: 7px 8px;
+}
+
+.divTableBody {
+	display: table-row-group;
+}
+
+.chiffre{
+	font-size:1.5em;
+	font-weight: bold;
+	color:#f26664;
+}
+
+.ptichiffre{
+	font-size:0.8em;
+	font-weight: bold;
+	color:#f26664;
+}
+
+.description {
+	font-size:0.8em;
+	font-weight: bold;
+	color:#ffffff;
+}
+
+.mycluster {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    font-size: 20px;    
+    line-height: 40px;
+    margin-top: -20px;
+    margin-left: -20px;
+}
+
+
+
+
