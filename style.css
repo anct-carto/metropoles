@@ -16,7 +16,7 @@ a {
 	}
 
 a:hover {
-  color : #ffee00;
+ background-color: #0097e7;
 }
 
 i {
@@ -48,7 +48,7 @@ h2{
 h3{
 	font-size:0.9em;
 	font-weight: bold;
-	color: #00414d;
+	color: #3b4358;
 }
 	
 .leaflet-left {
@@ -57,6 +57,12 @@ h3{
 	
 .fas {
   color : white;
+}
+
+.description {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #ffffff;
 }
 	
 #sources {
@@ -68,232 +74,41 @@ h3{
 	font-size:1.1em;
 	padding:5px;
 	border:none;
-	color: #00414d;
 	background-color: white;
 	}
 	
-.epci_Tooltips {
-	font-size:1em;
-	padding:5px;
-	border:none;
-	color: red;
-	background-color: rgba(255, 255, 255, 0.6);
-	box-shadow: none;
-	border: none;
-	}
 
 .bas {
 	margin-top:50px;
 }
 
-#boiteRecherche{
-	margin-bottom:40px;
-}
-	
-	
+
+		
 	/*Affichage des onglets*/	
 		
 #popup {
 	display: none;
 	}
 	
-#filtres {
-	display: none;
-	}
-	
-#onglet_departement {
-	display: none;
-	
-	}
-	
-#onglet_commune {
-	display: none;
-	}
-	
-#onglet_epci {
-	display: none;
-	}
-	
 #defaut {
 	display: block;
 	}
-
-#logo_dep {
-	background-image: url("img/tabdep.png");
-	background-repeat:no-repeat;
-	background-position:center center;
-}
-
-#logo_dep:hover {
-	background-image: url("img/tabondep.png");
-	background-repeat:no-repeat;
-	background-position:center center;
-}
-
-#logo_epci {
-	background-image: url("img/tabepci.png");
-	background-repeat:no-repeat;
-	background-position:center center;
-}
-
-#logo_epci:hover {
-	background-image: url("img/tabonepci.png");
-	background-repeat:no-repeat;
-	background-position:center center;
-}
-
-#logo_com {
-	background-image: url("img/tabcom.png");
-	background-repeat:no-repeat;
-	background-position:center center;
-}
-
-#logo_com:hover {
-	background-image: url("img/taboncom.png");
-	background-repeat:no-repeat;
-	background-position:center center;
-}
 	
 .onglets{
-	background-color: #00414d;
-	border: 0.1px solid #5a77b7;
-	
+	background-color: #3b4358;
 }
 
-.onglets img{
-	vertical-align:middle;
-	padding:7px;
-}
-
-#filtre {
-	background-image: url("img/picto_points_off.png");
-	background-repeat: no-repeat;
-	background-size: 18px;
-	background-position: center;
-	}
-	
-#filtre:hover {
-	background-image: url("img/picto_points_on.png");
-	background-repeat: no-repeat;
-	background-size: 18px;
-	background-position: center;
-	}
-
-#departements {
-	background-image: url("img/picto_onglet_off.png");
-	background-repeat: no-repeat;
-	background-size: 18px;
-	background-position: center;
-	}
-	
-#departements:hover {	
-	background-image: url("img/picto_onglet_on.png");
-	background-repeat: no-repeat;
-	background-size: 18px;
-	background-position: center;
-	}		
 
 .onglets:hover {
-	color: #004494;
-	background-color: #e1ff2f;
+	color: #ffffff;
+	background-color: #0097e7;
 }
 
 .onglets_on a{
 	background-color: #f26664;
-	border : 0.1px solid #5a77b7;
+	border : 0.1px solid #5a6687;
 }
 
-.bouton_min_off {
-		background-color: transparent;
-		border: 0.2px;
-		cursor:pointer;
-		padding:10px;
-		vertical-align: middle;
-		text-align: center;
-		}
-
-.bouton_min_on {
-		background-color: #206a75;
-		border-radius: 4px;
-		border: 0.2px;
-		cursor:pointer;
-		padding:10px;
-		vertical-align: middle;
-		text-align: center;
-		}
-		
-.bouton_off {
-		color: #00414d;
-		font-weight: bold;
-		background-color: transparent;
-		border: none;
-		cursor:pointer;
-		padding:3px;
-		margin: 1px;
-		vertical-align: middle;
-		text-align: left;
-		}
-		
-.bouton:hover {
-		background-color: #e1ff2f;
-		border-radius: 4px;
-		}
-		
-
-.bouton_on {
-		color: white;
-		font-weight: bold;
-		background-color: transparent;
-		border: none;
-		cursor:pointer;
-		padding:3px;
-		margin: 1px;
-		vertical-align: middle;
-		text-align: left;
-		}
-
-#retourDEP {
-		cursor:pointer;	
-		margin-top:15px;
-		}
-		
-#retourCategories {
-		cursor:pointer;	
-		margin-top:15px;
-		}
-
-button {
-	vertical-align: middle;	
-	background-color: transparent;
-	}	
-
-.button_container {
-	margin-top:15px;
-	}
-	
-.bouton_accueil {
-	background-color: #206a75;
-	opacity:0.8;
-	width:49%;
-	color: white;
-	font-weight: bold;
-	border-radius: 4px;
-	cursor:pointer;
-	display: inline-block;
-	padding:4px;
-	font-size:0.9em;
-}
-
-.bouton_accueil img {
-	width:15px;
-	padding:2px;
-}
-
-.bouton_accueil:hover {
-		background-color: #e1ff2f;
-		border-radius: 4px;
-		color: #00414d;
-		}
 
 
 /*Style du tableau*/
@@ -309,7 +124,7 @@ button {
 }
 
 .divTableCell, .divTableHead {
-	border: 0.1px solid #88a0b7;
+	border: 0.1px solid #de9e9d;
 	vertical-align:middle;
 	padding: 7px 8px;
 }
@@ -329,26 +144,5 @@ button {
 	font-weight: bold;
 	color:#f26664;
 }
-
-.description {
-	font-size:0.8em;
-	font-weight: bold;
-	color:#ffffff;
-}
-
-.mycluster {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    background-color: #3498db;
-    color: white;
-    text-align: center;
-    font-size: 20px;    
-    line-height: 40px;
-    margin-top: -20px;
-    margin-left: -20px;
-}
-
-
 
 

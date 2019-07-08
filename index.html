@@ -28,7 +28,7 @@
 		<div class="sidebar-tabs" id="barre-verticale">
             <ul role="tablist" >
                 <li><a href="#home" role="tab" id="logo" title="Retour à l'accueil" class="onglets"><i style="vertical-align:middle;" class="fas fa-home"></i></a></li>
-				<li><a href="https://upload.wikimedia.org/wikipedia/commons/f/f0/Plage_Sainte_Anne.JPG" id="download" role="tab" target="_blank" title="Télécharger l'atlas" class="onglets"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
+				<li><a href="img/Atlas_Metropoles.pdf" id="download" role="tab" target="_blank" title="Télécharger l'atlas" class="onglets"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
 			</ul>
         </div>
 
@@ -57,6 +57,7 @@
 				<!-- Contenu de la fiche d'information -->
 				<div class="divTable" id="popup">
 					<div id="libgeo"></div>
+					<div style="margin-bottom:5px;"><img src="img/fleche.png" style="vertical-align:middle; width:20px; padding:10px;" /><span id="lien"></span></div>
 					<div class="divTableBody">
 						<div class="divTableCell">
 								<h3 class="divTableRow">Date de création&nbsp;:</h3>
@@ -123,7 +124,7 @@
 	<script>
 			
 		// Création de la carte
-		var map = L.map('mapid', {maxZoom:11, minZoom:5 })
+		var map = L.map('mapid', {maxZoom:8, minZoom:5 })
 		.setView([46.5, -1.8], 6);
 		map.zoomControl.setPosition('topright');
 		map.attributionControl.addAttribution('<a href="https://cartotheque.cget.gouv.fr/cartes" style="text-decoration:none;" target="_blank ">CGET</a>');
@@ -163,10 +164,12 @@
 		map.getPane('cercles').style.zIndex = 510;
 		map.createPane('metro');
 		map.getPane('metro').style.zIndex = 520;
+		map.createPane('metCible');
+		map.getPane('metCible').style.zIndex = 530;
 		
 		
 		//Couches du fond de carte
-		Cache = L.geoJSON(JS_masque, {color: "#db9795", weight: 0, opacity: 1, fillOpacity: 1, pane: "fond"}).addTo(map);
+		Cache = L.geoJSON(JS_masque, {color: "#854358", weight: 0, opacity: 1, fillOpacity: 1, pane: "fond"}).addTo(map);
 		
 		Fond_Regions = L.geoJSON(JS_tout, {
 			filter: function(feature, layer) {return feature.properties.type=="région"},
@@ -187,7 +190,7 @@
 			filter: function(feature, layer) {return feature.properties.type=="zau"},
 			style: function(feature){
 				if (feature.properties.codgeo=="120"){
-					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#cccccc", pane: "fond"};
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#c6c5c5", pane: "fond"};
 				}
 				else if (feature.properties.codgeo=="112"){
 					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#bfbfbf", pane: "fond"};
@@ -196,7 +199,7 @@
 					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#b3b3b3", pane: "fond"};
 				}
 				else {
-					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#d9d9d9", pane: "fond"};
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#cfcfcf", pane: "fond"};
 				}
 			}
 		})
@@ -211,38 +214,11 @@
 		Metropoles_cercles = L.geoJSON(JS_metropoles, {
 			style: function(feature){return { opacity: 1, fillOpacity: 1, weight: 0, color: feature.properties.color, pane:'cercles'};},
 			onEachFeature: function(feature, layer) {
-				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
-				layer.on('click', function(e) {	popup(feature.properties);});	
-				}		
+				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips', offset:[-20,0]});
+				layer.on('click', function(e) {	popup(feature.properties);  });	
+				}	
 			}).addTo(map);
 			
-			/*pointToLayer: function(feature, latlng) {
-				
-				marker = L.circleMarker(latlng,{radius : feature.properties.TAILLE, pane: "cercles"}).addTo(map);
-
-				marker.bindTooltip(feature.properties.libgeo), {className: 'Tooltips'};
-				marker.on('click', function(e) {popup(e.target.properties); });
-				marker.properties = {};
-				marker.properties.libgeo = feature.properties.libgeo;
-				marker.properties.date = feature.properties.date;
-				marker.properties.nbcom = feature.properties.nbcom;
-				marker.properties.superficie = feature.properties.superficie;
-				marker.properties.population = feature.properties.population;
-				marker.properties.pctpopdep = feature.properties.pctpopdep;
-				marker.properties.pctpopreg = feature.properties.pctpopreg;
-				marker.properties.nbemplois = feature.properties.nbemplois;
-				marker.properties.pctempdep = feature.properties.pctempdep;
-				marker.properties.pctempreg = feature.properties.pctempreg;
-				marker.properties.nbqpv = feature.properties.nbqpv;
-				marker.properties.pctpopqpv = feature.properties.pctpopqpv;
-				marker.properties.txchom = feature.properties.txchom;
-				marker.properties.pctneet = feature.properties.pctneet;
-				marker.properties.potentiel = feature.properties.potentiel;
-				}*/
-			//});
-		
-		
-
 		
 /* FICHE TERRITOIRE */
 		
@@ -284,7 +260,8 @@
 			document.getElementById('popup').style.display = "block";
 			document.getElementById('defaut').style.display = "none";
 			//Remplissage de la popup
-			document.getElementById('libgeo').innerHTML = "<h1 style='color:#00414d'>"+e.libgeo+"</h1>";
+			document.getElementById('libgeo').innerHTML = "<h1 style='color:#3b4358'>"+e.libgeo+"</h1>";
+			document.getElementById('lien').innerHTML = "<span><a href='maps/CGET_Portrait_Metropole_"+e.id_nom+".jpg' target='blank'>Télécharger le portrait de la Métropole</a></span>";
 			document.getElementById('date').innerHTML = "<span>"+e.date+"</span>";
 			document.getElementById('nbcom').innerHTML = "<span>"+e.nbcom+"</span>";
 			document.getElementById('superficie').innerHTML = "<span>"+format3(e.superficie)+" km²</span>";
@@ -328,6 +305,18 @@
 			event.stopPropagation();
 			retourAcceuil();
 		});
+		
+		//Entourer territoire sélectionné
+		var metCib; //lors d'un simple clic
+		function metropoleCible(e) {
+			if(metCib) {map.removeLayer(metCib2);}
+			console.log(e);
+			metCib = new L.polygon(e, {color:"red", pane:"metCible"}).addTo(map);
+			console.log(metCib);
+			//map.removeLayer(Metropoles_cercles);
+			//metCib = new L.polygon(e, {weight:3, color:"red",interactive: false, pane:'territoireCible', fillOpacity: 0});
+			//metCib.addTo(map);
+		}
 		
    </script>
 	
