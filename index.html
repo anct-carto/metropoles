@@ -117,7 +117,7 @@
     <script src="src/leaflet-sidebar.js"></script>
 
 	<script type="text/javascript"  src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
-	<script type="text/javascript" src="data/metropoles.js"></script>
+	<script type="text/javascript" src="data/metropoles-gd.js"></script>
 	<script type="text/javascript" src="data/masque.js"></script>
 	<script type="text/javascript" src="data/toutesCouches.js"></script>
     
@@ -164,6 +164,8 @@
 		map.getPane('cercles').style.zIndex = 510;
 		map.createPane('metro');
 		map.getPane('metro').style.zIndex = 520;
+		map.createPane('metCible2');
+		map.getPane('metCible2').style.zIndex = 525;
 		map.createPane('metCible');
 		map.getPane('metCible').style.zIndex = 530;
 		
@@ -190,34 +192,61 @@
 			filter: function(feature, layer) {return feature.properties.type=="zau"},
 			style: function(feature){
 				if (feature.properties.codgeo=="120"){
-					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#c6c5c5", pane: "fond"};
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#d9d9d9", pane: "fond"};
 				}
 				else if (feature.properties.codgeo=="112"){
-					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#bfbfbf", pane: "fond"};
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#cccccc", pane: "fond"};
 				}
 				else if (feature.properties.codgeo=="111"){
-					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#b3b3b3", pane: "fond"};
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#bfbfbf", pane: "fond"};
 				}
 				else {
-					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#cfcfcf", pane: "fond"};
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#e3e3e3", pane: "fond"};
 				}
 			}
 		})
 		.addTo(map);
 		
+		var poly = [];
 		Metropoles_S = L.geoJSON(JS_tout, {
 			filter: function(feature, layer) {return feature.properties.type=="epci"},
-			style : {interactive : false, color: "#000", weight: 0, fillOpacity: 1, pane: "metro"}
+			style : {interactive:false, fillColor: "#000", weight: 0, fillOpacity: 1, pane: "metro"},
+			onEachFeature: function(feature, layer) {
+				var varName = feature.properties.codgeo;
+				poly[varName] = feature;			
+				}
 			}).addTo(map);
-		
+			
 		var Metropoles_cercles = [];
 		Metropoles_cercles = L.geoJSON(JS_metropoles, {
-			style: function(feature){return { opacity: 1, fillOpacity: 1, weight: 0, color: feature.properties.color, pane:'cercles'};},
-			onEachFeature: function(feature, layer) {
+			style: function(feature){return { opacity: 1, fillOpacity: 0.7, weight: 0, color: feature.properties.color, pane:'cercles'};},
+			onEachFeature: function(feature, layer) {		
 				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips', offset:[-20,0]});
-				layer.on('click', function(e) {	popup(feature.properties);  });	
+				layer.on('click', function(e) {	
+					popup(feature.properties); 
+					metropoleCible(feature.properties.codgeo);
+					e.preventDefault();					
+					});	
+				layer.on('mouseover', function(e) {	
+					metropoleCible2(feature.properties.codgeo); 
+					});	
+				layer.on('mouseout', function(e) {	
+					if(metCib2) {map.removeLayer(metCib2);}
+					});	
 				}	
 			}).addTo(map);
+			
+		var metCib = [];
+		function metropoleCible(e){ 
+			if(metCib) {map.removeLayer(metCib);}
+			metCib = L.geoJSON(poly[e], {interactive:false, opacity: 1, fillOpacity: 1, fillColor: '#0097e7', weight: 1, color: '#ffffff', pane: "metCible2"}).addTo(map);
+		}
+		
+		var metCib2 = [];
+		function metropoleCible2(e){ 
+			if(metCib2) {map.removeLayer(metCib2);}
+			metCib2 = L.geoJSON(poly[e], {interactive:false, color: '#0097e7',pane: "metCible"}).addTo(map);
+		}
 			
 		
 /* FICHE TERRITOIRE */
@@ -295,28 +324,19 @@
 		}
 		
 			
-		/*Action au clic sur la carte
+		//Action au clic sur la carte
 		map.on('click', function(e) { 
-			alert('cliconmap');
-			});*/
+			if(metCib) {map.removeLayer(metCib);}
+			if(metCib2) {map.removeLayer(metCib2);}
+			event.stopPropagation();
+			});
 		
 		//Action au clic sur "home"
 		document.getElementById("logo").addEventListener("click", function(event){
 			event.stopPropagation();
 			retourAcceuil();
 		});
-		
-		//Entourer territoire sélectionné
-		var metCib; //lors d'un simple clic
-		function metropoleCible(e) {
-			if(metCib) {map.removeLayer(metCib2);}
-			console.log(e);
-			metCib = new L.polygon(e, {color:"red", pane:"metCible"}).addTo(map);
-			console.log(metCib);
-			//map.removeLayer(Metropoles_cercles);
-			//metCib = new L.polygon(e, {weight:3, color:"red",interactive: false, pane:'territoireCible', fillOpacity: 0});
-			//metCib.addTo(map);
-		}
+	
 		
    </script>
 	
