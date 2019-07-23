@@ -166,4 +166,17 @@ h3{
 	color:#f26664;
 }
 
+#tip {
+	display:none;
+	font-size:0.9em;
+    position: absolute;
+	top: 30%;
+	left: 40%;
+	background-color: rgba(222,158,157,0.9);
+	width:400px;
+	z-index: 3000;
+	text-align:center;
+	padding:10px;
+	border-radius:20px;
+}
 
