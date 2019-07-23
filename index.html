@@ -48,9 +48,9 @@
 						
 					</div>
 					
-					<div id="sources" style="width:70%;">
-						<p><i>Sources&nbsp;: <a href="https://www.cget.gouv.fr/territoires/metropoles" target="_blank">CGET, Direction des stratégories territoriales</a>• Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" target="_blank">CGET service cartographie</a></i></p>
-						<p><img src="img/cget.png" style="vertical-align:middle; width:100%;"/></p>
+					<div id="sources" style="width:100%;">
+						<p><i>Sources des données&nbsp;: <a href="https://www.cget.gouv.fr/territoires/metropoles" target="_blank">CGET, Direction des stratégories territoriales, INSEE RP, DGCL</a> • Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" target="_blank">CGET service cartographie</a></i></p>
+						<p><img src="img/cget.png" style="vertical-align:middle; width:70%;"/></p>
 					</div>
 				</div>
 				
@@ -89,7 +89,7 @@
 								<div class="divTableRow description" id="pctpopqpv"></div>
 						</div>
 						<div class="divTableCell">
-								<h3 class="divTableRow">Taux de chômage en 2015(en %)&nbsp;:</h3>
+								<h3 class="divTableRow">Taux de chômage en 2015&nbsp;:</h3>
 								<div class="divTableRow chiffre" id="txchom"></div>
 						</div>
 						<div class="divTableCell">
@@ -292,8 +292,8 @@
 		
 		//Fonctions de formatage de nombres
 		function format1(nombre){ //2 chiffres après la virgule
-		  nombre=parseFloat(nombre).toFixed(2);
-		  return nombre;
+		  nombre=parseFloat(nombre).toFixed(1);
+		  return nombre.replace(".", ",");
 		}
 		function format2(nombre){ //séparateurs de milliers
 		  nombre=parseFloat(nombre).toFixed(0);
@@ -340,10 +340,10 @@
 			document.getElementById('pctempdep').innerHTML = "<span>Part des emplois du département&nbsp;: "+format1(e.pctempdep)+"%</span>";
 			document.getElementById('pctempreg').innerHTML = "<span>Part des emplois de la région&nbsp;: "+format1(e.pctempreg)+"%</span>";
 			document.getElementById('nbqpv').innerHTML = "<span>"+e.nbqpv+"</span>";
-			document.getElementById('pctpopqpv').innerHTML = "<span>Part de la population vivant en QPV : "+format1(e.pctpopqpv)+"%</span>";
+			document.getElementById('pctpopqpv').innerHTML = "<span>Part de la population vivant en QPV&nbsp;: "+format1(e.pctpopqpv)*100+"%</span>";
 			document.getElementById('txchom').innerHTML = "<span>"+format1(e.txchom)+"%</span>";
 			document.getElementById('pctneet').innerHTML = "<span>"+format1(e.pctneet)+"%</span>";
-			document.getElementById('potentiel').innerHTML = "<span>"+e.potentiel+"</span>";
+			document.getElementById('potentiel').innerHTML = "<span>"+e.potentiel+"€</span>";
 		}
 		
 	
