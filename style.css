@@ -12,11 +12,10 @@ html, body, #mapid {
 a {
 	text-decoration:none;
 	color: white;
-	
 	}
 
 a:hover {
- background-color: #0097e7;
+	background-color: #844358;
 }
 
 i {
@@ -34,19 +33,19 @@ span {
 }
 		
 h1{
-	font-size:2 em;
+	font-size:1.5em;
 	text-transform:uppercase;
 	color: white;
 	}
 	
 h2{
-	font-size:1.2em;
+	font-size:1.6em;
 	font-weight: bold;
-	color: #ffffff;
+	color: #3b4358;
 }
 
 h3{
-	font-size:0.9em;
+	font-size:0.85em;
 	font-weight: bold;
 	color: #3b4358;
 }
@@ -71,19 +70,41 @@ h3{
 	}
 
 .Tooltips {
-	font-size:1.1em;
-	padding:5px;
+	font-size:1.2em;
+	padding:0 3px;
 	border:none;
-	background-color: white;
+	font-weight: bold;	
+	margin: -25px 0px;
 	}
-	
+
+.Tooltipsmarseille {background-color: #ff3298;color:white;}	
+.Tooltipsbordeaux {background-color: #e50072;color:white;}	
+.Tooltipsparis {background-color: #ff7fbf;color:#2a2a2a;}	
+.Tooltipsbrest {background-color: #b20058;color:white;}	
+.Tooltipsclermont {background-color: #8ed5f0;color:#2a2a2a;}	
+.Tooltipsdijon {background-color: #33b5e5;color:white;}	
+.Tooltipsstrasbourg {background-color: #0099cc;color:white;}	
+.Tooltipsmetz {background-color: #bc93d1;color:#2a2a2a;}	
+.Tooltipsmontpellier {background-color: #aa66cc;color:#2a2a2a;}	
+.Tooltipslille {background-color: #9933cc;color:white;}	
+.Tooltipsgrenoble {background-color: #2c4c00;color:white;}	
+.Tooltipsnice {background-color: #99cc00;color:#2a2a2a;}	
+.Tooltipsrouen {background-color: #cc6c00;color:white;}	
+.Tooltipstoulon {background-color: #ffbb33;color:#2a2a2a;}	
+.Tooltipslyon {background-color: #ff8800;color:#2a2a2a;}	
+.Tooltipsnancy {background-color: #ffb2b2;color:#2a2a2a;}	
+.Tooltipsnantes {background-color: #ff7f7f;color:#2a2a2a;}	
+.Tooltipsorleans {background-color: #ff4444;color:white;}	
+.Tooltipsrennes {background-color: #669900;color:white;}	
+.Tooltipssaintetienne {background-color: #007299;color:white;}	
+.Tooltipstoulouse {background-color: #436500;color:white;}	
+.Tooltipstours {background-color: #cc0000;color:white;}	
 
 .bas {
 	margin-top:50px;
 }
 
 
-		
 	/*Affichage des onglets*/	
 		
 #popup {
@@ -124,7 +145,7 @@ h3{
 }
 
 .divTableCell, .divTableHead {
-	border: 0.1px solid #de9e9d;
+	border: 1px solid rgba(255,255,255,0.5);
 	vertical-align:middle;
 	padding: 7px 8px;
 }
@@ -134,7 +155,7 @@ h3{
 }
 
 .chiffre{
-	font-size:1.5em;
+	font-size:1.3em;
 	font-weight: bold;
 	color:#f26664;
 }

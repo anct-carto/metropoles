@@ -117,7 +117,7 @@
     <script src="src/leaflet-sidebar.js"></script>
 
 	<script type="text/javascript"  src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
-	<script type="text/javascript" src="data/metropoles-gd.js"></script>
+	<script type="text/javascript" src="data/metropoles.js"></script>
 	<script type="text/javascript" src="data/masque.js"></script>
 	<script type="text/javascript" src="data/toutesCouches.js"></script>
     
@@ -171,11 +171,11 @@
 		
 		
 		//Couches du fond de carte
-		Cache = L.geoJSON(JS_masque, {color: "#854358", weight: 0, opacity: 1, fillOpacity: 1, pane: "fond"}).addTo(map);
+		Cache = L.geoJSON(JS_masque, {color: "#ffe9dd", weight: 0, opacity: 1, fillOpacity: 1, pane: "fond"}).addTo(map);
 		
 		Fond_Regions = L.geoJSON(JS_tout, {
 			filter: function(feature, layer) {return feature.properties.type=="région"},
-			style : {weight: 0, opacity: 1, fillOpacity: 1, fillColor:"#d9d9d9", pane: "fond"}
+			style : {weight: 0, opacity: 1, fillOpacity: 1, fillColor:"#d4d4d4", pane: "fond"}
 			}).addTo(map);
 		
 		Contour_Regions = L.geoJSON(JS_tout, {
@@ -192,16 +192,16 @@
 			filter: function(feature, layer) {return feature.properties.type=="zau"},
 			style: function(feature){
 				if (feature.properties.codgeo=="120"){
-					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#d9d9d9", pane: "fond"};
-				}
-				else if (feature.properties.codgeo=="112"){
 					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#cccccc", pane: "fond"};
 				}
-				else if (feature.properties.codgeo=="111"){
+				else if (feature.properties.codgeo=="112"){
 					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#bfbfbf", pane: "fond"};
 				}
+				else if (feature.properties.codgeo=="111"){
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#aeaeae", pane: "fond"};
+				}
 				else {
-					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#e3e3e3", pane: "fond"};
+					return {opacity: 1, fillOpacity: 1, weight: 0, color:"#d4d4d4", pane: "fond"};
 				}
 			}
 		})
@@ -210,18 +210,49 @@
 		var poly = [];
 		Metropoles_S = L.geoJSON(JS_tout, {
 			filter: function(feature, layer) {return feature.properties.type=="epci"},
-			style : {interactive:false, fillColor: "#000", weight: 0, fillOpacity: 1, pane: "metro"},
+			style : {interactive:false, fillColor: "#2a2a2a", weight: 0, fillOpacity: 1, pane: "metro"},
 			onEachFeature: function(feature, layer) {
 				var varName = feature.properties.codgeo;
 				poly[varName] = feature;			
 				}
 			}).addTo(map);
+		
+		function getColor(e) {
+		var couleur;
+		switch (e) {
+			case "paris" : couleur="#ff7fbf"; break;
+			case "marseille" : couleur="#ff3298"; break;
+			case "bordeaux" : couleur="#e50072"; break;
+			case "brest" : couleur="#b20058"; break;
+			case "clermont" : couleur="#8ed5f0"; break;
+			case "dijon" : couleur="#33b5e5"; break;
+			case "strasbourg" : couleur="#0099cc"; break;
+			case "metz" : couleur="#bc93d1"; break;
+			case "montpellier" : couleur="#aa66cc"; break;
+			case "lille" : couleur="#9933cc"; break;
+			case "grenoble" : couleur="#2c4c00"; break;
+			case "nice" : couleur="#99cc00"; break;
+			case "rouen" : couleur="#cc6c00"; break;
+			case "toulon" : couleur="#ffbb33"; break;
+			case "lyon" : couleur="#ff8800"; break;
+			case "nancy" : couleur="#ffb2b2"; break;
+			case "nantes" : couleur="#ff7f7f"; break;
+			case "orleans" : couleur="#ff4444"; break;
+			case "rennes" : couleur="#669900"; break;
+			case "saintetienne" : couleur="#007299"; break;
+			case "toulouse" : couleur="#436500"; break;
+			case "tours" : couleur="#cc0000"; break;
+			default: couleur="#fff"; 
 			
+			}
+		return couleur;
+		}
+
 		var Metropoles_cercles = [];
 		Metropoles_cercles = L.geoJSON(JS_metropoles, {
-			style: function(feature){return { opacity: 1, fillOpacity: 0.7, weight: 0, color: feature.properties.color, pane:'cercles'};},
+			style: function(feature){return { opacity: 1, fillOpacity: 0.7, weight: 0, color: getColor(feature.properties.id_nom), pane:'cercles'};},
 			onEachFeature: function(feature, layer) {		
-				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips', offset:[-20,0]});
+				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips Tooltips'+feature.properties.id_nom, direction: "center"});
 				layer.on('click', function(e) {	
 					popup(feature.properties); 
 					metropoleCible(feature.properties.codgeo);
@@ -239,13 +270,13 @@
 		var metCib = [];
 		function metropoleCible(e){ 
 			if(metCib) {map.removeLayer(metCib);}
-			metCib = L.geoJSON(poly[e], {interactive:false, opacity: 1, fillOpacity: 1, fillColor: '#0097e7', weight: 1, color: '#ffffff', pane: "metCible2"}).addTo(map);
+			metCib = L.geoJSON(poly[e], {interactive:false, opacity: 1, fillOpacity: 1, fillColor: 'yellow', weight: 1, color: '#3b4358', pane: "metCible2"}).addTo(map);
 		}
 		
 		var metCib2 = [];
 		function metropoleCible2(e){ 
 			if(metCib2) {map.removeLayer(metCib2);}
-			metCib2 = L.geoJSON(poly[e], {interactive:false, color: '#0097e7',pane: "metCible"}).addTo(map);
+			metCib2 = L.geoJSON(poly[e], {interactive:false, color: 'yellow',pane: "metCible", weight:1}).addTo(map);
 		}
 			
 		
@@ -289,7 +320,7 @@
 			document.getElementById('popup').style.display = "block";
 			document.getElementById('defaut').style.display = "none";
 			//Remplissage de la popup
-			document.getElementById('libgeo').innerHTML = "<h1 style='color:#3b4358'>"+e.libgeo+"</h1>";
+			document.getElementById('libgeo').innerHTML = "<h2>"+e.libgeo+"</h2>";
 			document.getElementById('lien').innerHTML = "<span><a href='maps/CGET_Portrait_Metropole_"+e.id_nom+".jpg' target='blank'>Télécharger le portrait de la Métropole</a></span>";
 			document.getElementById('date').innerHTML = "<span>"+e.date+"</span>";
 			document.getElementById('nbcom').innerHTML = "<span>"+e.nbcom+"</span>";
@@ -321,6 +352,8 @@
 		function retourAcceuil () {
 			resetView();
 			resetMap ();
+			document.getElementById('popup').style.display = "none";
+			document.getElementById('defaut').style.display = "block";
 		}
 		
 			
@@ -328,7 +361,9 @@
 		map.on('click', function(e) { 
 			if(metCib) {map.removeLayer(metCib);}
 			if(metCib2) {map.removeLayer(metCib2);}
+			retourAcceuil();
 			event.stopPropagation();
+			
 			});
 		
 		//Action au clic sur "home"
