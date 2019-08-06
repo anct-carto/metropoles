@@ -125,9 +125,10 @@
     <script src="src/leaflet-sidebar.js"></script>
 
 	<script type="text/javascript"  src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
-	<script type="text/javascript" src="data/metropoles.js"></script>
+	<script type="text/javascript" src="data/metropoles3.js"></script>
 	<script type="text/javascript" src="data/masque.js"></script>
-	<script type="text/javascript" src="data/toutesCouches.js"></script>
+	<script type="text/javascript" src="data/toutesCouches_gen.js"></script>
+	<script type="text/javascript" src="data/cercles_drom.js"></script>
     
 	<script>
 			
@@ -179,7 +180,8 @@
 		
 		
 		//Couches du fond de carte
-		Cache = L.geoJSON(JS_masque, {color: "#ffe9dd", weight: 0, opacity: 1, fillOpacity: 1, pane: "fond"}).addTo(map);
+		Cache = L.geoJSON(JS_masque, {color: "#f0f2f6", weight: 0, opacity: 1, fillOpacity: 1, pane: "fond"}).addTo(map);
+		Cercles_drom = L.geoJSON(JS_drom, {color: "#ffffff", weight: 0.9, opacity: 1, fillOpacity: 0, pane: "cercles"}).addTo(map);
 		
 		Fond_Regions = L.geoJSON(JS_tout, {
 			filter: function(feature, layer) {return feature.properties.type=="région"},
@@ -188,12 +190,12 @@
 		
 		Contour_Regions = L.geoJSON(JS_tout, {
 			filter: function(feature, layer) {return feature.properties.type=="région"},
-			style : {color: "#ffffff", weight: 2, opacity: 1, fillOpacity: 0, pane: "contour"}
+			style : {color: "#ffffff", weight: 1.3, opacity: 1, fillOpacity: 0, pane: "contour"}
 			}).addTo(map);
 		
 		Departements = L.geoJSON(JS_tout, {
 			filter: function(feature, layer) {return feature.properties.type=="départemen"},
-			style: {color: "#ffffff", weight: 1, opacity: 1, fillOpacity: 0, pane: "contour"}
+			style: {color: "#ffffff", weight: 0.5, opacity: 1, fillOpacity: 0, pane: "contour"}
 			}).addTo(map);
 		
 		ZAU = L.geoJSON(JS_tout, {
@@ -231,25 +233,25 @@
 			case "paris" : couleur="#ff7fbf"; break;
 			case "marseille" : couleur="#ff3298"; break;
 			case "bordeaux" : couleur="#e50072"; break;
-			case "brest" : couleur="#b20058"; break;
+			case "brest" : couleur="#9a008b"; break;
 			case "clermont" : couleur="#8ed5f0"; break;
 			case "dijon" : couleur="#33b5e5"; break;
-			case "strasbourg" : couleur="#0099cc"; break;
+			case "strasbourg" : couleur="#3a57ff"; break;
 			case "metz" : couleur="#bc93d1"; break;
 			case "montpellier" : couleur="#aa66cc"; break;
 			case "lille" : couleur="#9933cc"; break;
 			case "grenoble" : couleur="#2c4c00"; break;
 			case "nice" : couleur="#99cc00"; break;
 			case "rouen" : couleur="#cc6c00"; break;
-			case "toulon" : couleur="#ffbb33"; break;
-			case "lyon" : couleur="#ff8800"; break;
+			case "toulon" : couleur="#ffda2e"; break;
+			case "lyon" : couleur="#ff7000"; break;
 			case "nancy" : couleur="#ffb2b2"; break;
 			case "nantes" : couleur="#ff7f7f"; break;
 			case "orleans" : couleur="#ff4444"; break;
 			case "rennes" : couleur="#669900"; break;
 			case "saintetienne" : couleur="#007299"; break;
-			case "toulouse" : couleur="#436500"; break;
-			case "tours" : couleur="#cc0000"; break;
+			case "toulouse" : couleur="#00a900"; break;
+			case "tours" : couleur="#ce0000"; break;
 			default: couleur="#fff"; 
 			
 			}
@@ -258,7 +260,7 @@
 
 		var Metropoles_cercles = [];
 		Metropoles_cercles = L.geoJSON(JS_metropoles, {
-			style: function(feature){return { opacity: 1, fillOpacity: 0.7, weight: 0, color: getColor(feature.properties.id_nom), pane:'cercles'};},
+			style: function(feature){return { opacity: 1, fillOpacity: 0.75, weight: 0, color: getColor(feature.properties.id_nom), pane:'cercles'};},
 			onEachFeature: function(feature, layer) {		
 				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips Tooltips'+feature.properties.id_nom, direction: "center"});
 				layer.on('click', function(e) {	

@@ -15,7 +15,7 @@ a {
 	}
 
 a:hover {
-	background-color: #844358;
+	background-color: #0097e7;
 }
 
 i {
@@ -80,25 +80,25 @@ h3{
 .Tooltipsmarseille {background-color: #ff3298;color:white;}	
 .Tooltipsbordeaux {background-color: #e50072;color:white;}	
 .Tooltipsparis {background-color: #ff7fbf;color:#2a2a2a;}	
-.Tooltipsbrest {background-color: #b20058;color:white;}	
+.Tooltipsbrest {background-color: #9a008b;color:white;}	
 .Tooltipsclermont {background-color: #8ed5f0;color:#2a2a2a;}	
 .Tooltipsdijon {background-color: #33b5e5;color:white;}	
-.Tooltipsstrasbourg {background-color: #0099cc;color:white;}	
+.Tooltipsstrasbourg {background-color: #3a57ff;color:white;}	
 .Tooltipsmetz {background-color: #bc93d1;color:#2a2a2a;}	
 .Tooltipsmontpellier {background-color: #aa66cc;color:#2a2a2a;}	
 .Tooltipslille {background-color: #9933cc;color:white;}	
 .Tooltipsgrenoble {background-color: #2c4c00;color:white;}	
 .Tooltipsnice {background-color: #99cc00;color:#2a2a2a;}	
 .Tooltipsrouen {background-color: #cc6c00;color:white;}	
-.Tooltipstoulon {background-color: #ffbb33;color:#2a2a2a;}	
-.Tooltipslyon {background-color: #ff8800;color:#2a2a2a;}	
+.Tooltipstoulon {background-color: #ffda2e;color:#2a2a2a;}	
+.Tooltipslyon {background-color: #ff7000;color:#2a2a2a;}	
 .Tooltipsnancy {background-color: #ffb2b2;color:#2a2a2a;}	
 .Tooltipsnantes {background-color: #ff7f7f;color:#2a2a2a;}	
 .Tooltipsorleans {background-color: #ff4444;color:white;}	
 .Tooltipsrennes {background-color: #669900;color:white;}	
 .Tooltipssaintetienne {background-color: #007299;color:white;}	
-.Tooltipstoulouse {background-color: #436500;color:white;}	
-.Tooltipstours {background-color: #cc0000;color:white;}	
+.Tooltipstoulouse {background-color: #00a900;color:white;}	
+.Tooltipstours {background-color: #ce0000;color:white;}	
 
 .bas {
 	margin-top:50px;
@@ -172,7 +172,7 @@ h3{
     position: absolute;
 	top: 30%;
 	left: 40%;
-	background-color: rgba(222,158,157,0.9);
+	background-color: rgba(208,216,233,0.97);
 	width:400px;
 	z-index: 3000;
 	text-align:center;
