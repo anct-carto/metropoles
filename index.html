@@ -28,7 +28,7 @@
 		<div class="sidebar-tabs" id="barre-verticale">
             <ul role="tablist" >
                 <li><a href="#home" role="tab" id="logo" title="Retour à l'accueil" class="onglets"><i style="vertical-align:middle;" class="fas fa-home"></i></a></li>
-				<li><a href="img/Atlas_Metropoles.pdf" id="download" role="tab" target="_blank" title="Télécharger l'atlas" class="onglets"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
+				<li><a href="img/Atlas_Metropoles.pdf" id="download" role="tab" target="_blank" title="Télécharger l'atlas" class="onglets hyperlien"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
 			</ul>
         </div>
 
@@ -49,7 +49,7 @@
 					</div>
 					
 					<div id="sources" style="width:100%;">
-						<p><i>Sources des données&nbsp;: <a href="https://www.cget.gouv.fr/territoires/metropoles" target="_blank">CGET, Direction des stratégories territoriales, INSEE RP, DGCL</a> • Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" target="_blank">CGET service cartographie</a></i></p>
+						<p><i>Sources des données&nbsp;: <a href="https://www.cget.gouv.fr/territoires/metropoles" class="hyperlien" target="_blank">CGET, Direction des stratégories territoriales, INSEE RP, DGCL</a> • Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" class="hyperlien" target="_blank">CGET service cartographie</a></i></p>
 						<p><img src="img/cget.png" style="vertical-align:middle; width:70%;"/></p>
 					</div>
 				</div>
@@ -57,7 +57,11 @@
 				<!-- Contenu de la fiche d'information -->
 				<div class="divTable" id="popup">
 					<div id="libgeo"></div>
-					<div style="margin-bottom:5px;"><img src="img/fleche.png" style="vertical-align:middle; width:20px; padding:10px;" /><span id="lien"></span></div>
+					
+					<div class="button_container">
+						<button class="bouton_telecharger" ><i class="fa fa-download" style="padding:2px;"></i><div id="lien" ></div></button>
+					</div>
+					
 					<div class="divTableBody">
 						<div class="divTableCell">
 								<h3 class="divTableRow">Date de création&nbsp;:</h3>
@@ -100,6 +104,7 @@
 								<h3 class="divTableRow">Potentiel financier par habitant en 2017&nbsp;:<img id="infos" onmouseover="document.getElementById('tip').style.display = 'block'" onmouseout="document.getElementById('tip').style.display = 'none'" src="img/picto_infos.png" style="vertical-align:middle; cursor:pointer; width:20px; padding:0 7px;" /></h3>
 								<div class="divTableRow chiffre" id="potentiel"></div>
 						</div>
+						<div id="retour"><img src='img/fleche.png' style='vertical-align:middle; width:20px; padding:0px 15px;'  />Retour</div>
 					</div>
 					
 				</div>
@@ -331,7 +336,8 @@
 			document.getElementById('defaut').style.display = "none";
 			//Remplissage de la popup
 			document.getElementById('libgeo').innerHTML = "<h2>"+e.libgeo+"</h2>";
-			document.getElementById('lien').innerHTML = "<span><a href='maps/CGET_Portrait_Metropole_"+e.id_nom+".jpg' target='blank'>Télécharger le portrait de la Métropole</a></span>";
+			document.getElementById('lien').innerHTML = "<a href='maps/CGET_Portrait_Metropole_"+e.id_nom+".jpg' target='blank'>Télécharger la carte de la Métropole</a>";
+			//document.getElementById('lien').innerHTML = "Télécharger la carte de la Métropole";
 			document.getElementById('date').innerHTML = "<span>"+e.date+"</span>";
 			document.getElementById('nbcom').innerHTML = "<span>"+e.nbcom+"</span>";
 			document.getElementById('superficie').innerHTML = "<span>"+format3(e.superficie)+" km²</span>";
@@ -342,10 +348,10 @@
 			document.getElementById('pctempdep').innerHTML = "<span>Part des emplois du département&nbsp;: "+format1(e.pctempdep)+"%</span>";
 			document.getElementById('pctempreg').innerHTML = "<span>Part des emplois de la région&nbsp;: "+format1(e.pctempreg)+"%</span>";
 			document.getElementById('nbqpv').innerHTML = "<span>"+e.nbqpv+"</span>";
-			document.getElementById('pctpopqpv').innerHTML = "<span>Part de la population vivant en QPV&nbsp;: "+format1(e.pctpopqpv)*100+"%</span>";
+			document.getElementById('pctpopqpv').innerHTML = "<span>Part de la population vivant en QPV&nbsp;: "+format1(e.pctpopqpv*100)+"%</span>";
 			document.getElementById('txchom').innerHTML = "<span>"+format1(e.txchom)+"%</span>";
 			document.getElementById('pctneet').innerHTML = "<span>"+format1(e.pctneet)+"%</span>";
-			document.getElementById('potentiel').innerHTML = "<span>"+e.potentiel+"€</span>";
+			document.getElementById('potentiel').innerHTML = "<span>"+e.potentiel+" €</span>";
 		}
 		
 	
@@ -366,7 +372,11 @@
 			document.getElementById('defaut').style.display = "block";
 		}
 		
-			
+		//Action au clic sur retour vers l'accueil
+		document.getElementById("retour").addEventListener("click", function(event){
+			retourAcceuil();
+		});
+		
 		//Action au clic sur la carte
 		map.on('click', function(e) { 
 			if(metCib) {map.removeLayer(metCib);}

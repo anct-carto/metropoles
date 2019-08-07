@@ -6,16 +6,24 @@ body {
 html, body, #mapid {
     height: 100%;
 	font-family: 'Asap', sans-serif;
-	color: #00414d;
 	}
 	
 a {
 	text-decoration:none;
-	color: white;
+	color:white;
 	}
-
+	
 a:hover {
-	background-color: #0097e7;
+	color: #657eb6;
+	}
+	
+.hyperlien {
+	color:white;
+}
+	
+.hyperlien:hover {
+	color: #657eb6;
+	background-color: yellow;
 }
 
 i {
@@ -104,6 +112,34 @@ h3{
 	margin-top:50px;
 }
 
+.button_container {
+	margin:10px;
+	}
+	
+.bouton_telecharger {
+	background-color: #657eb6;
+	opacity:1;
+	width:100%;
+	color: white;
+	font-weight: bold;
+	border-radius: 10px;
+	cursor:pointer;
+	padding:10px;
+	font-size:0.9em;
+}
+
+.bouton_telecharger:hover {
+	background-color: yellow;
+	color: #657eb6;
+}
+
+.bouton_telecharger:hover a {
+	color: #657eb6;
+}
+
+#lien:hover {
+	color: #657eb6;
+}
 
 	/*Affichage des onglets*/	
 		
@@ -121,8 +157,8 @@ h3{
 
 
 .onglets:hover {
-	color: #fff;
-	background-color: #0097e7;
+	color: #657eb6;
+	background-color: yellow;
 }
 
 .onglets_on a{
@@ -130,7 +166,18 @@ h3{
 	border : 0.1px solid #5a6687;
 }
 
-
+#retour {
+	cursor:pointer;	
+	margin-top:15px;
+	padding:5px;
+		}
+		
+#retour:hover {
+	color: #657eb6;
+	background-color: yellow;
+	border-radius:4px;
+	
+	}
 
 /*Style du tableau*/
 	
