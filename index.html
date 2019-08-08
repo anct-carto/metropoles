@@ -43,8 +43,22 @@
 				<!-- Page d'accueil -->
 				<div class="presentation" id="defaut">
 					<div>
-						<h2>Portrait des 22 métropoles</h2>
-						<p><span style="color:white;">ICI</span>, possibilité de mettre un texte introductif de présentation</p>
+						<!--<h2>Portrait des 22 métropoles</h2>-->
+						<p  style="color:#fff;">Depuis le 1er janvier 2018, la France compte <strong>22 Métropoles.</strong></p>
+							<p style="padding-left:10px;" >Les Métropoles sont des <strong>intercommunalités aux compétences renforcées</strong>, dans les domaines du développement économique et du logement notamment.</p>
+							<p style="padding-left:10px;" >Chaque région métropolitaine française compte entre une et quatre Métropoles.</p>
+						
+						<p style="color:#fff;">Parmi les 22 Métropoles françaises :</p>
+							<p class="paragraphe" >• Bordeaux, Brest, Clermont-Auvergne, Dijon, Lyon, Nancy, Lille, Aix-Marseille-Provence, Nantes, Nice-Côte d’Azur, Orléans, Saint-Étienne, Strasbourg, Toulouse et Tours Val de Loire sont issues d’une transformation directe de <strong>« communautés urbaines » </strong>;</p>
+							<p class="paragraphe" >• Grenoble-Alpes, Metz, Montpellier-Méditerranée, Rennes, Rouen-Normandie et Toulon-Provence-Méditerranée sont issues d’une transformation directe de <strong>« communautés d’agglomération »</strong> ;</p>
+							<p class="paragraphe" >• les Métropoles du Grand Paris et Aix-Marseille Provence sont des <strong>Métropoles à dispositions particulières</strong> ;</p>
+							<p class="paragraphe" >• la Métropole du Grand Lyon est une <strong>collectivité à statut particulier</strong>, exerçant sur son périmètre les compétences du département du Rhône.</p>
+						
+						<p style="color:#fff;">Cette carte interactive permet d’accéder, pour la première fois, pour chacune des 22 Métropoles, à :</p>
+							<p class="paragraphe" >• une série de chiffres clés ;</p>
+							<p class="paragraphe" >• une carte la situant dans son environnement territorial ;</p>
+							<p class="paragraphe" >• le pacte métropolitain d’innovation et de coopération ;</p>
+							<p class="paragraphe" >• des études du CGET sur cette Métropole.</p>
 						
 					</div>
 					
@@ -59,7 +73,7 @@
 					<div id="libgeo"></div>
 					
 					<div class="button_container">
-						<button class="bouton_telecharger" ><i class="fa fa-download" style="padding:2px;"></i><div id="lien" ></div></button>
+						<button class="bouton_telecharger" ><i class="fa fa-download" style="font-size:0.8em; padding:2px;"></i><div id="lien" ></div></button>
 					</div>
 					
 					<div class="divTableBody">
@@ -104,6 +118,13 @@
 								<h3 class="divTableRow">Potentiel financier par habitant en 2017&nbsp;:<img id="infos" onmouseover="document.getElementById('tip').style.display = 'block'" onmouseout="document.getElementById('tip').style.display = 'none'" src="img/picto_infos.png" style="vertical-align:middle; cursor:pointer; width:20px; padding:0 7px;" /></h3>
 								<div class="divTableRow chiffre" id="potentiel"></div>
 						</div>
+						
+						<div class="divTableCell">
+								<h3 class="divTableRow">Télécharger les documents associés&nbsp;:</h3>
+								</br>
+								<div class="divTableRow description hyperlien" id="pacte"></div>
+						</div>
+						
 						<div id="retour"><img src='img/fleche.png' style='vertical-align:middle; width:20px; padding:0px 15px;'  />Retour</div>
 					</div>
 					
@@ -130,7 +151,7 @@
     <script src="src/leaflet-sidebar.js"></script>
 
 	<script type="text/javascript"  src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
-	<script type="text/javascript" src="data/metropoles3.js"></script>
+	<script type="text/javascript" src="data/metropoles.js"></script>
 	<script type="text/javascript" src="data/masque.js"></script>
 	<script type="text/javascript" src="data/toutesCouches_gen.js"></script>
 	<script type="text/javascript" src="data/cercles_drom.js"></script>
@@ -352,6 +373,12 @@
 			document.getElementById('txchom').innerHTML = "<span>"+format1(e.txchom)+"%</span>";
 			document.getElementById('pctneet').innerHTML = "<span>"+format1(e.pctneet)+"%</span>";
 			document.getElementById('potentiel').innerHTML = "<span>"+e.potentiel+" €</span>";
+			
+			if(e.pacte != "non") {
+				document.getElementById('pacte').style.display = "block";
+				document.getElementById('pacte').innerHTML = "<a href='"+e.pacte+"' >&rarr; Télécharger le pacte métropolitain</a>";
+				}
+			else {document.getElementById('pacte').style.display = "none";}
 		}
 		
 	

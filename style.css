@@ -19,11 +19,13 @@ a:hover {
 	
 .hyperlien {
 	color:white;
+	border-radius:4px;
 }
 	
 .hyperlien:hover {
 	color: #657eb6;
 	background-color: yellow;
+	border-radius:4px;
 }
 
 i {
@@ -56,6 +58,18 @@ h3{
 	font-size:0.85em;
 	font-weight: bold;
 	color: #3b4358;
+}
+
+.presentation {
+	color: #3b4358;
+	line-height: 1.1em;
+	padding-top:10px;
+}
+
+.paragraphe {
+	padding-left:10px;
+	font-size:0.9em;
+	line-height: 1em;
 }
 	
 .leaflet-left {
@@ -124,7 +138,7 @@ h3{
 	font-weight: bold;
 	border-radius: 10px;
 	cursor:pointer;
-	padding:10px;
+	padding:5px;
 	font-size:0.9em;
 }
 
