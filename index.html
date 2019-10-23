@@ -44,26 +44,26 @@
 				<div class="presentation" id="defaut">
 					<div>
 						<!--<h2>Portrait des 22 métropoles</h2>-->
-						<p  style="color:#fff;">Depuis le 1er janvier 2018, la France compte <strong>22 Métropoles.</strong></p>
-							<p style="padding-left:10px;" >Les Métropoles sont des <strong>intercommunalités aux compétences renforcées</strong>, dans les domaines du développement économique et du logement notamment.</p>
-							<p style="padding-left:10px;" >Chaque région métropolitaine française compte entre une et quatre Métropoles.</p>
+						<p  style="color:#fff;">Depuis le 1er janvier 2018, la France compte <strong>22 métropoles.</strong></p>
+							<p style="padding-left:10px;" >Les métropoles sont des <strong>intercommunalités aux compétences renforcées</strong>, dans les domaines du développement économique et du logement notamment.</p>
+							<p style="padding-left:10px;" >Chaque région métropolitaine française compte entre une et quatre métropoles.</p>
 						
-						<p style="color:#fff;">Parmi les 22 Métropoles françaises :</p>
+						<p style="color:#fff;">Parmi les 22 métropoles françaises :</p>
 							<p class="paragraphe" >• Bordeaux, Brest, Clermont-Auvergne, Dijon, Lyon, Nancy, Lille, Aix-Marseille-Provence, Nantes, Nice-Côte d’Azur, Orléans, Saint-Étienne, Strasbourg, Toulouse et Tours Val de Loire sont issues d’une transformation directe de <strong>« communautés urbaines » </strong>;</p>
 							<p class="paragraphe" >• Grenoble-Alpes, Metz, Montpellier-Méditerranée, Rennes, Rouen-Normandie et Toulon-Provence-Méditerranée sont issues d’une transformation directe de <strong>« communautés d’agglomération »</strong> ;</p>
-							<p class="paragraphe" >• les Métropoles du Grand Paris et Aix-Marseille Provence sont des <strong>Métropoles à dispositions particulières</strong> ;</p>
-							<p class="paragraphe" >• la Métropole du Grand Lyon est une <strong>collectivité à statut particulier</strong>, exerçant sur son périmètre les compétences du département du Rhône.</p>
+							<p class="paragraphe" >• les métropoles du Grand Paris et Aix-Marseille Provence sont des <strong>métropoles à dispositions particulières</strong> ;</p>
+							<p class="paragraphe" >• la métropole du Grand Lyon est une <strong>collectivité à statut particulier</strong>, exerçant sur son périmètre les compétences du département du Rhône.</p>
 						
-						<p style="color:#fff;">Cette carte interactive permet d’accéder, pour la première fois, pour chacune des 22 Métropoles, à :</p>
+						<p style="color:#fff;">Cette carte interactive permet d’accéder, pour la première fois, pour chacune des 22 métropoles, à :</p>
 							<p class="paragraphe" >• une série de chiffres clés ;</p>
 							<p class="paragraphe" >• une carte la situant dans son environnement territorial ;</p>
 							<p class="paragraphe" >• le pacte métropolitain d’innovation et de coopération ;</p>
-							<p class="paragraphe" >• des études du CGET sur cette Métropole.</p>
+							<p class="paragraphe" >• des études du CGET sur cette métropole.</p>
 						
 					</div>
 					
 					<div id="sources" style="width:100%;">
-						<p><i>Sources des données&nbsp;: <a href="https://www.cget.gouv.fr/territoires/metropoles" class="hyperlien" target="_blank">CGET, Direction des stratégories territoriales, INSEE RP, DGCL</a> • Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" class="hyperlien" target="_blank">CGET service cartographie</a></i></p>
+						<p><i>Sources des données&nbsp;: <a href="https://www.cget.gouv.fr/territoires/metropoles" class="hyperlien" target="_blank">CGET, Direction des stratégories territoriales,</a> INSEE RP, DGCL • Réalisation&nbsp;: bureau de la prospective et des études, <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" class="hyperlien" target="_blank">CGET service cartographie</a></i></p>
 						<p><img src="img/cget.png" style="vertical-align:middle; width:70%;"/></p>
 					</div>
 				</div>
@@ -72,9 +72,9 @@
 				<div class="divTable" id="popup">
 					<div id="libgeo"></div>
 					
-					<div class="button_container">
+					<!--<div class="button_container">
 						<button class="bouton_telecharger" ><i class="fa fa-download" style="font-size:0.8em; padding:2px;"></i><div id="lien" ></div></button>
-					</div>
+					</div>-->
 					
 					<div class="divTableBody">
 						<div class="divTableCell">
@@ -96,13 +96,13 @@
 								<div class="divTableRow description" id="pctpopreg"></div>
 						</div>
 						<div class="divTableCell">
-								<h3 class="divTableRow">Nombre d’emplois dans la Métropole en 2015&nbsp;:</h3>
+								<h3 class="divTableRow">Nombre d’emplois dans la métropole en 2015&nbsp;:</h3>
 								<div class="divTableRow chiffre" id="nbemplois"></div>
 								<div class="divTableRow description" id="pctempdep"></div>
 								<div class="divTableRow description" id="pctempreg"></div>
 						</div>
 						<div class="divTableCell">
-								<h3 class="divTableRow">Nombre de quartiers prioritaires de la politique de la ville dans la Métropole&nbsp;:</h3>
+								<h3 class="divTableRow">Nombre de quartiers prioritaires de la politique de la ville dans la métropole&nbsp;:</h3>
 								<div class="divTableRow chiffre" id="nbqpv"></div>
 								<div class="divTableRow description" id="pctpopqpv"></div>
 						</div>
@@ -119,10 +119,14 @@
 								<div class="divTableRow chiffre" id="potentiel"></div>
 						</div>
 						
-						<div class="divTableCell">
-								<h3 class="divTableRow">Télécharger les documents associés&nbsp;:</h3>
-								</br>
-								<div class="divTableRow description hyperlien" id="pacte"></div>
+						<div class="divTableCell downloadCell">
+								<h3 class="divTableRow" >Documents-ressources à télécharger&nbsp;:</h3>
+								<div class="divTableRow" id="lien"></div>
+								<div class="divTableRow" id="pacte"></div>
+								<div class="divTableRow" id="etude1"></div>
+								<div class="divTableRow" id="etude2"></div>
+								<div class="divTableRow" id="etude3"></div>
+								<div class="divTableRow" id="etude4"></div>
 						</div>
 						
 						<div id="retour"><img src='img/fleche.png' style='vertical-align:middle; width:20px; padding:0px 15px;'  />Retour</div>
@@ -357,7 +361,7 @@
 			document.getElementById('defaut').style.display = "none";
 			//Remplissage de la popup
 			document.getElementById('libgeo').innerHTML = "<h2>"+e.libgeo+"</h2>";
-			document.getElementById('lien').innerHTML = "<a href='maps/CGET_Portrait_Metropole_"+e.id_nom+".jpg' target='blank'>Télécharger la carte de la Métropole</a>";
+			
 			//document.getElementById('lien').innerHTML = "Télécharger la carte de la Métropole";
 			document.getElementById('date').innerHTML = "<span>"+e.date+"</span>";
 			document.getElementById('nbcom').innerHTML = "<span>"+e.nbcom+"</span>";
@@ -374,11 +378,36 @@
 			document.getElementById('pctneet').innerHTML = "<span>"+format1(e.pctneet)+"%</span>";
 			document.getElementById('potentiel').innerHTML = "<span>"+e.potentiel+" €</span>";
 			
+			document.getElementById('lien').innerHTML = "<a href='maps/CGET_Portrait_Metropole_"+e.id_nom+".jpg' target='blank' class='download'>&rarr; La carte ''La métropole dans son environnement territorial''</a>";
 			if(e.pacte != "non") {
 				document.getElementById('pacte').style.display = "block";
-				document.getElementById('pacte').innerHTML = "<a href='"+e.pacte+"' >&rarr; Télécharger le pacte métropolitain</a>";
+				document.getElementById('pacte').innerHTML = "<a href='"+e.pacte+"'  class='download'>&rarr; Le pacte métropolitain d’innovation et de coopération </a>";
 				}
 			else {document.getElementById('pacte').style.display = "none";}
+			
+			if(e.etude1 != "non") {
+				document.getElementById('etude1').style.display = "block";
+				document.getElementById('etude1').innerHTML = "<a href='"+e.etude1+"'  class='download'>&rarr; Étude n°1 </a>";
+				}
+			else {document.getElementById('etude1').style.display = "none";}
+			
+			if(e.etude2 != "non") {
+				document.getElementById('etude2').style.display = "block";
+				document.getElementById('etude2').innerHTML = "<a href='"+e.etude1+"'  class='download'>&rarr; Étude n°2 </a>";
+				}
+			else {document.getElementById('etude2').style.display = "none";}
+			
+			if(e.etude3 != "non") {
+				document.getElementById('etude3').style.display = "block";
+				document.getElementById('etude3').innerHTML = "<a href='"+e.etude1+"'  class='download'>&rarr; Étude n°3 </a>";
+				}
+			else {document.getElementById('etude3').style.display = "none";}
+			
+			if(e.etude4 != "non") {
+				document.getElementById('etude4').style.display = "block";
+				document.getElementById('etude4').innerHTML = "<a href='"+e.etude1+"'  class='download'>&rarr; Étude n°4 </a>";
+				}
+			else {document.getElementById('etude4').style.display = "none";}
 		}
 		
 	

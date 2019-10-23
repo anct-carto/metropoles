@@ -28,6 +28,25 @@ a:hover {
 	border-radius:4px;
 }
 
+.download {
+	color:white;
+	padding:2px;
+	border-radius:4px;
+	font-style: italic;
+	font-weight: bold;
+	font-size:0.9em;
+	line-height:12px;
+}
+
+.downloadCell{
+	background-color: #849bc5;
+}
+
+.download:hover{
+	background-color: yellow;
+	border-radius:4px;
+}
+
 i {
 	font-size:0.9em;
 	font-style: italic;	
@@ -55,9 +74,10 @@ h2{
 }
 
 h3{
-	font-size:0.85em;
+	font-size:0.9em;
 	font-weight: bold;
 	color: #3b4358;
+	line-height:25px;
 }
 
 .presentation {
